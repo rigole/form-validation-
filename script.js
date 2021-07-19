@@ -15,6 +15,7 @@ function validateForm() {
         message.textContent =  "Please fill out all the fields";
         message.style.color = 'red';
         messageContainer.style.borderColor = 'red';
+        return; // if isValid = true then skip the next part
     }
    // Check to see if passwords match
     if (password1El.value === password2El.value){
@@ -28,6 +29,7 @@ function validateForm() {
         messageContainer.style.borderColor = 'red';
         password1El.style.borderColor = 'red';
         password2El.style.borderColor = 'red';
+        return; // is passwords match  then skip the next part
     }
 
     // If form is valid and passwords match
@@ -38,10 +40,26 @@ function validateForm() {
     }
 }
 
+function storeFormData() {
+    const user = {
+        name: form.name.value,
+        phone: form.phone.value,
+        email: form.email.value,
+        website: form.website.value,
+        password: form.password.value
+    };
+    console.log(user);
+}
+
 function processFormData(e) {
     e.preventDefault();
     // Validate form
     validateForm();
+    // Submit Data if Valid
+    if (isValid && passwordsMatch){
+        storeFormData();
+    }
+
 }
 
 
